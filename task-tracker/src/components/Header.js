@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {useLocation} from "react-router-dom";
 import Button from "./Button";
 
 const Header = ({title, setButton, showAdd}) => {
+    const location = useLocation()
+
 
     const clickHandler = () => {
         setButton()
@@ -11,7 +14,10 @@ const Header = ({title, setButton, showAdd}) => {
     return (
         <header className="header">
             <h1>{title}</h1>
-            <Button color={!showAdd ? "green" : "red"} text={!showAdd ? "Add" : "Close"} clickHandler={clickHandler}/>
+            {location.pathname === "/" && (
+                <Button color={!showAdd ? "green" : "red"} text={!showAdd ? "Add" : "Close"}
+                        clickHandler={clickHandler}/>
+            )}
         </header>
     )
 }
